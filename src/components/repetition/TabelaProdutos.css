@@ -1,0 +1,15 @@
+.Tabela {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.Tabela td,th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.Tabela tr:nth-child(even) {
+    background-color: #ddd;
+}
