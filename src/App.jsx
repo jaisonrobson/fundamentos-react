@@ -13,11 +13,16 @@ import TabelaProdutos from './components/repetition/TabelaProdutos'
 import ParImpar from './components/conditional/ParImpar'
 import UsuarioInfo from './components/conditional/UsuarioInfo'
 import DiretaPai from './components/comunication/DiretaPai'
+import IndiretaPai from './components/comunication/IndiretaPai'
 
 const App = (props) => (
     <div className="App">
         <h1>Fundamentos React</h1>
         <div className="Cards">
+            <Card titulo="#10 - Comunicacao indireta entre componentes" color="#8bad39">
+                <IndiretaPai />
+            </Card>
+
             <Card titulo="#09 - Comunicacao direta entre componentes" color="#59323c">
                 <DiretaPai />
             </Card>
