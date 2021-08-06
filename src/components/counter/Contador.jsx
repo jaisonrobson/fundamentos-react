@@ -2,6 +2,10 @@ import './Contador.css'
 
 import React from 'react'
 
+import Display from './Display'
+import Botoes from './Botoes'
+import PassoForm from './PassoForm'
+
 class Contador extends React.Component {
     state = {
         numero: 0,
@@ -39,9 +43,9 @@ class Contador extends React.Component {
     //     })
     // }
 
-    setPasso = (event) => {
+    setPasso = (novoPasso) => {
         this.setState({
-            passo: +event.target.value, //Usar o mais (+) para converter a string para numero
+            passo: novoPasso,
         })
     }
 
@@ -49,14 +53,12 @@ class Contador extends React.Component {
         return (
             <div className="Contador">
                 <h2>Contador</h2>
-                <p>Valor inicial: {this.props.numeroInicial}</p>
-                <p>Valor atual: {this.state.numero}</p>
-                <div>
-                    <label htmlFor="passoInput">Passo: </label>
-                    <input id="passoInput" type="num" value={this.state.passo} onChange={this.setPasso} />
-                </div>
-                <button onClick={this.inc}>+</button>
-                <button onClick={this.dec}>-</button>
+
+                <Display numeroInicial={this.props.numeroInicial} numero={this.state.numero} />
+
+                <PassoForm passo={this.state.passo} setPasso={this.setPasso} />
+
+                <Botoes incrementar={this.inc} decrementar={this.dec} />
                 {/* <button onClick={() => this.inc()}>Incrementar</button> */} {/* Outra forma sem a necessidade do bind */}
             </div>
         )
