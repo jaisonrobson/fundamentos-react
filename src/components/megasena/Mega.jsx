@@ -1,55 +1,35 @@
 import './Mega.css'
 
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
-import { gerarNumeracao } from './mega.js'
+import { gerarNumeros } from './mega.js'
 
-export default class Mega extends Component {
-    state = {
-        quantidadeNumeros: 6,
-        surpresinha: [],
-    }
+export default props => {
 
-    setQuantidadeNumeros = (quantidadeNumeros) => {
-        if (!quantidadeNumeros || quantidadeNumeros <= 0 || quantidadeNumeros > 60) return
+    const [qtd, setQtd] = useState(props.qtd || 6)
+    const numerosIniciais = gerarNumeros(qtd)
+    const [numeros, setNumeros] = useState(numerosIniciais)
 
-        this.setState({
-            quantidadeNumeros,
-        })
-    }
+    return (
+        <div className="Mega">
+            <h2>Mega</h2>
 
-    setSurpresinha = () => {
-        this.setState({
-            surpresinha: gerarNumeracao(this.state.quantidadeNumeros),
-        })
-    }
+            <h3>{numeros.join(' ')}</h3>
 
-    render() {
+            <label>Qtde de numeros</label>
 
-        return (
-            <div className="Mega">
-                <div>
-                    <label htmlFor="qtdNumeros">Quantidade de numeros: </label>
+            <input
+                type="number"
+                min="6"
+                max="60"
+                value={qtd}
+                onChange={(event) => {
+                    setQtd(+event.target.value)
+                    setNumeros(gerarNumeros(+event.target.value))
+                }}
+            />
 
-                    <input
-                        id="qtdNumeros"
-                        type="number"
-                        onChange={(e) => this.setQuantidadeNumeros(parseInt(e.target.value))}
-                        value={this.state.quantidadeNumeros}
-                    />
-                </div>
-
-                <button onClick={this.setSurpresinha}>Surpresinha</button>
-
-                <h2>Surpresinha</h2>
-                <p>
-                    {
-                        this.state.surpresinha.reduce(
-                            (resultado, nmr) => resultado + ' ' + nmr, ''
-                        )
-                    }
-                </p>
-            </div>
-        )
-    }
+            <button onClick={() => setNumeros(gerarNumeros(qtd))}>Gerar numeros</button>
+        </div>
+    )
 }

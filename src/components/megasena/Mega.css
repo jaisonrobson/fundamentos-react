@@ -1,5 +1,8 @@
-.Mega button {
-    margin: 25px;
-    width: 100px;
-    height: 100px;
+.Mega input {
+    font-size: 1.4rem;
+    width: 50px;
+}
+
+.Mega label {
+    margin-right: 10px;
 }

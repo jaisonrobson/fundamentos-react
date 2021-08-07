@@ -1,21 +1,20 @@
-export function gerarNumeracao(qtdNumeros) {
-    if (qtdNumeros > 60) return null
+export function gerarNumeroNaoContido(min, max, array) {
+    const aleatorio = parseInt(Math.random() * (max + 1 - min)) + min
 
-    const numeracao = []
-    const intervalo = 60 / qtdNumeros
+    return array.includes(aleatorio) ?
+        gerarNumeroNaoContido(min, max, array) :
+        aleatorio
+}
 
-    for (var n = 1; n < qtdNumeros + 1; n++) {
-        const numeroMinimo = (numeracao[numeracao.length - 1] || 1)
-        const numeroMaximo = n * intervalo
+export function gerarNumeros(qtd) {
+    const numeros = Array(qtd)
+        .fill(0)
+        .reduce((nums) => {
+            const novoNumero = gerarNumeroNaoContido(1, 60, nums)
 
-        let numero = parseInt(((numeroMaximo - numeroMinimo) * Math.random()) + numeroMinimo)
+            return [...nums, novoNumero]
+        }, [])
+        .sort((n1, n2) => n1 - n2)
 
-        while (numero <= numeracao[numeracao.length - 1]) {
-            numero = parseInt(Math.ceil((numeroMaximo - numeroMinimo) * Math.random()) + numeroMinimo)
-        }
-
-        numeracao.push(numero)
-    }
-
-    return numeracao
+    return numeros
 }
